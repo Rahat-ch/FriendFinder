@@ -1,12 +1,14 @@
 const path = require("path");
 
-module.exports = function (app) {
+module.exports = app => {
 
-  app.get("/survey", function(req, res) {
+  //route for sruvey page
+  app.get("/survey", (req, res) => {
     res.sendFile(path.join(__dirname + "/../public/survey.html"));
   });
 
-  app.use(function (req,res) {
+  //this needs to go last for the rest of the routes to actually work this will automatically make any page not specified above go to the home page
+  app.use( (req,res) => {
     res.sendFile(path.join(__dirname + "/../public/home.html"));
   });
 
