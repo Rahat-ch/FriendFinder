@@ -21,8 +21,8 @@ app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
 app.use(bodyParser.text({ type: 'text/html' }))
 
 //access the routes so express can display each of our pages
-require("./app/routing/apiRoutes.js")(app);
-require("./app/routing/htmlRoutes.js")(app);
+require("/app/routing/apiRoutes.js")(app);
+require("/app/routing/htmlRoutes.js")(app);
 
 
 app.listen(PORT, function() {
