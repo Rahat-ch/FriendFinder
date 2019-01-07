@@ -1,14 +1,15 @@
 const express = require("express");
 const app = express();
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const path = require("path");
 
 const PORT = process.env.PORT || 8080;
 
-// create application/json parser
-const jsonParser = bodyParser.json()
+// // create application/json parser
+// const jsonParser = bodyParser.json()
 
 // create application/x-www-form-urlencoded parser
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // parse various different custom JSON types as JSON
 app.use(bodyParser.json({ type: 'application/*+json' }))
@@ -19,8 +20,10 @@ app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
 // parse an HTML body into a string
 app.use(bodyParser.text({ type: 'text/html' }))
 
-//access the html routes so express can display each of our pages
+//access the routes so express can display each of our pages
+require("./app/routing/apiRoutes.js")(app);
 require("./app/routing/htmlRoutes.js")(app);
+
 
 app.listen(PORT, function() {
   console.log("App listening on PORT: " + PORT);
